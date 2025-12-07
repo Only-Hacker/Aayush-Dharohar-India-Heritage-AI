@@ -41,7 +41,7 @@ const ImageIdentifier: React.FC = () => {
       const analysis = await identifyHeritageImage(base64Data, blob.type);
       setResult(analysis);
     } catch (err) {
-      setError("Failed to identify the image. Please try again with a clearer picture.");
+      setError("Failed to identify the image. The AI might be having trouble seeing it clearly. Try another photo.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -54,7 +54,7 @@ const ImageIdentifier: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 animate-fade-in">
         <h2 className="text-4xl font-serif font-bold text-royalMaroon mb-4">Dharohar Vision</h2>
         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
           Point your camera at any monument, temple, or artifact. 
@@ -77,7 +77,7 @@ const ImageIdentifier: React.FC = () => {
                 <img src={image} alt="Preview" className="w-full h-full object-contain" />
               ) : (
                 <div className="flex flex-col items-center p-8 text-center">
-                   <div className="h-16 w-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-3xl text-orange-600 group-hover:scale-110 transition-transform">📷</div>
+                   <div className="h-20 w-20 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-4xl text-orange-600 group-hover:scale-110 transition-transform shadow-sm">📷</div>
                    <p className="text-gray-900 font-bold text-lg">Upload Photo</p>
                    <p className="text-gray-500 text-sm mt-1">Drag & drop or click to browse</p>
                 </div>
@@ -92,7 +92,7 @@ const ImageIdentifier: React.FC = () => {
             </div>
 
             {/* Controls */}
-            <div className="mt-8 flex gap-4 w-full justify-center">
+            <div className="mt-8 flex flex-wrap gap-4 w-full justify-center">
               <button 
                 onClick={triggerFileInput}
                 className="px-6 py-3 rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
@@ -138,7 +138,7 @@ const ImageIdentifier: React.FC = () => {
                       <span className="bg-orange-100 p-1 rounded">📍</span> {result.location}
                     </p>
                  </div>
-                 <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
+                 <div className="bg-white p-4 rounded-2xl shadow-md border border-gray-100">
                     <span className="text-4xl">🏛️</span>
                  </div>
               </div>

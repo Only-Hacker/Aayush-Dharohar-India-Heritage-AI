@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { QuizQuestion, IdentificationResult, DailyFact } from "../types";
+import { QuizQuestion, IdentificationResult, DailyFact, ExplorerResult } from "../types";
 
 const apiKey = process.env.API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
@@ -29,7 +29,46 @@ export const getDailyFact = async (): Promise<DailyFact> => {
     }
     throw new Error("No response");
   } catch (e) {
-    return { topic: "Did You Know?", fact: "India has 42 UNESCO World Heritage Sites, ranking 6th in the world." };
+    return { topic: "Did You Know?", fact: "The Kumbh Mela is visible from space, gathering over 100 million people." };
+  }
+};
+
+export const searchHeritage = async (query: string): Promise<ExplorerResult> => {
+  try {
+    const model = 'gemini-2.5-flash';
+    const prompt = `Provide detailed information about the Indian heritage site, monument, or cultural element: "${query}". 
+    If the query is not related to India or invalid, return a polite error description in the description field.`;
+
+    const response = await ai.models.generateContent({
+      model,
+      contents: prompt,
+      config: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            name: { type: Type.STRING },
+            description: { type: Type.STRING },
+            location: { type: Type.STRING },
+            builtBy: { type: Type.STRING },
+            year: { type: Type.STRING },
+            architecturalStyle: { type: Type.STRING },
+            interestingFacts: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
+          },
+        },
+      },
+    });
+
+    if (response.text) {
+      return JSON.parse(response.text) as ExplorerResult;
+    }
+    throw new Error("No response");
+  } catch (e) {
+    console.error(e);
+    throw new Error("Failed to fetch heritage details.");
   }
 };
 

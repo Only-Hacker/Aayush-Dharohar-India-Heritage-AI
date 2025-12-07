@@ -1,7 +1,8 @@
 export enum ViewState {
   HOME = 'HOME',
-  QUIZ = 'QUIZ',
+  EXPLORE = 'EXPLORE',
   IDENTIFY = 'IDENTIFY',
+  QUIZ = 'QUIZ',
   LEADERBOARD = 'LEADERBOARD',
 }
 
@@ -36,4 +37,14 @@ export interface IdentificationResult {
 export interface DailyFact {
   topic: string;
   fact: string;
+}
+
+export interface ExplorerResult {
+  name: string;
+  description: string;
+  location: string;
+  builtBy: string;
+  year: string;
+  architecturalStyle: string;
+  interestingFacts: string[];
 }
