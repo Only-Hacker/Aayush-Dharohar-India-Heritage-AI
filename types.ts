@@ -32,3 +32,8 @@ export interface IdentificationResult {
   historicalSignificance: string;
   culturalFacts: string[];
 }
+
+export interface DailyFact {
+  topic: string;
+  fact: string;
+}

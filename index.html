@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dharohar - Indian Heritage Explorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -18,8 +18,29 @@
               saffron: '#FF9933',
               indiaGreen: '#138808',
               navyBlue: '#000080',
-              gold: '#D4AF37',
-              deepPurple: '#2E003E',
+              royalMaroon: '#800000',
+              royalGold: '#FFD700',
+              antiqueCream: '#FFFDD0',
+              sand: '#F5DEB3',
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'slide-up': 'slideUp 0.5s ease-out forwards',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
             }
           }
         }
@@ -28,34 +49,44 @@
     <style>
       body {
         font-family: 'Poppins', sans-serif;
-        background-color: #f8fafc;
+        background-color: #FFFAF0; /* Floral White */
+        color: #2D2D2D;
       }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Playfair Display', serif;
       }
-      /* Custom scrollbar for webkit */
+      /* Custom scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 10px;
       }
       ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
+        background: #FFFAF0; 
       }
       ::-webkit-scrollbar-thumb {
         background: #D4AF37; 
-        border-radius: 4px;
+        border-radius: 5px;
+        border: 2px solid #FFFAF0;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #b59226; 
+        background: #B8860B; 
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
       }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.1/client",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.1",
     "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
     "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-canvas-confetti": "https://aistudiocdn.com/react-canvas-confetti@^2.0.7"
+    "react-canvas-confetti": "https://aistudiocdn.com/react-canvas-confetti@^2.0.7",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/"
   }
 }
 </script>

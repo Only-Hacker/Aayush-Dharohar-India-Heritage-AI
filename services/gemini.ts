@@ -1,8 +1,37 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { QuizQuestion, IdentificationResult } from "../types";
+import { QuizQuestion, IdentificationResult, DailyFact } from "../types";
 
 const apiKey = process.env.API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
+
+export const getDailyFact = async (): Promise<DailyFact> => {
+  try {
+    const model = 'gemini-2.5-flash';
+    const prompt = "Generate a fascinating, short, lesser-known cultural fact about India. Return JSON with 'topic' (e.g. Architecture, Food, History) and 'fact' (max 2 sentences).";
+    
+    const response = await ai.models.generateContent({
+      model,
+      contents: prompt,
+      config: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            topic: { type: Type.STRING },
+            fact: { type: Type.STRING },
+          },
+        },
+      },
+    });
+
+    if (response.text) {
+      return JSON.parse(response.text) as DailyFact;
+    }
+    throw new Error("No response");
+  } catch (e) {
+    return { topic: "Did You Know?", fact: "India has 42 UNESCO World Heritage Sites, ranking 6th in the world." };
+  }
+};
 
 export const identifyHeritageImage = async (base64Image: string, mimeType: string): Promise<IdentificationResult> => {
   try {
