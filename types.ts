@@ -1,0 +1,34 @@
+export enum ViewState {
+  HOME = 'HOME',
+  QUIZ = 'QUIZ',
+  IDENTIFY = 'IDENTIFY',
+  LEADERBOARD = 'LEADERBOARD',
+}
+
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  answer: string; // The correct option text
+  explanation: string;
+}
+
+export interface QuizResult {
+  score: number;
+  total: number;
+  date: string;
+  mode: 'daily' | 'endless';
+}
+
+export interface LeaderboardEntry {
+  name: string;
+  score: number;
+  mode: 'daily' | 'endless';
+  date: string;
+}
+
+export interface IdentificationResult {
+  name: string;
+  location: string;
+  historicalSignificance: string;
+  culturalFacts: string[];
+}

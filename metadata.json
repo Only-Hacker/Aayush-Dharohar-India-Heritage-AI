@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Dharohar - India Heritage AI",
+  "description": "Explore the rich cultural heritage of India through AI-powered image recognition, interactive quizzes, and daily challenges.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
